@@ -1,0 +1,208 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Flexbox - Aula de CSS</title>
+  <link rel="stylesheet" href="style.css">
+  <link rel="stylesheet" href="flexbox.css">
+</head>
+<body>
+
+  <header>
+    <h1>Flexbox - Aula de CSS</h1>
+    <a href="index.html">⬅ Voltar ao Hub</a>
+  </header>
+
+  <main>
+    <section>
+      <h2>O que é Flexbox?</h2>
+      <p>
+        Pense no Flexbox como uma “esteira” que organiza caixas em sequência.  
+        Você escolhe se a esteira anda na <strong>horizontal</strong> ou na <strong>vertical</strong> e define como
+        as caixas se distribuem, crescem ou encolhem para ocupar o espaço disponível.
+      </p>
+      <ul>
+        <li><code>display: flex;</code> — liga a “esteira” no contêiner.</li>
+        <li><code>flex-direction</code> — define a direção da esteira (linha ou coluna).</li>
+        <li><code>justify-content</code> — distribui os itens ao longo da direção escolhida.</li>
+        <li><code>align-items</code> — alinha os itens no outro eixo (transversal).</li>
+        <li><code>gap</code> — cria o respiro entre as caixas sem gambiarras.</li>
+      </ul>
+    </section>
+
+    <section>
+      <h2>1) Tornando um contêiner flex</h2>
+      <p>
+        Ao transformar um elemento em flex, os filhos passam a obedecer a mesma linha/coluna
+        e você ganha controle de quebra e espaçamento sem precisar mexer item por item.
+      </p>
+      <pre><code>.linha {
+  display: flex;
+  flex-direction: row;
+  flex-wrap: wrap;
+  gap: 12px;
+}</code></pre>
+
+      <div class="demo-bloco">
+        <div class="demo-legenda">display: flex; wrap; gap: 12px;</div>
+        <div class="linha exemplo-1">
+          <div class="item">1</div>
+          <div class="item">2</div>
+          <div class="item">3</div>
+          <div class="item">4</div>
+          <div class="item">5</div>
+          <div class="item">6</div>
+        </div>
+      </div>
+    </section>
+
+    <!-- SEÇÃO 2 com fix de overflow escopado -->
+    <section class="sec-alinhamentos">
+      <h2>2) Alinhamentos: eixo principal e cruzado</h2>
+      <p>
+        O Flexbox tem dois eixos. O <strong>principal</strong> acompanha o <code>flex-direction</code>; 
+        o <strong>cruzado</strong> é o perpendicular.  
+        Distribuímos os itens no eixo principal com <code>justify-content</code> e ajustamos a “altura/linha”
+        deles no cruzado com <code>align-items</code>.
+      </p>
+
+      <div class="exemplos-grid">
+        <div>
+          <h3>justify-content</h3>
+          <pre class="snippet"><code>.jus {
+  display: flex;
+  justify-content: space-between; /* start | center | end | space-around | space-evenly */
+  gap: 12px;
+}</code></pre>
+
+          <div class="demo-bloco">
+            <div class="demo-legenda">space-between</div>
+            <div class="jus">
+              <div class="item">A</div>
+              <div class="item">B</div>
+              <div class="item">C</div>
+            </div>
+          </div>
+        </div>
+
+        <div>
+          <h3>align-items</h3>
+          <pre class="snippet"><code>.align {
+  display: flex;
+/* align-items opções:
+   stretch | flex-start | center | flex-end | baseline */
+  align-items: center;
+  gap: 12px;
+  height: 120px;
+}</code></pre>
+
+          <div class="demo-bloco">
+            <div class="demo-legenda">align-items: center</div>
+            <div class="align">
+              <div class="item alto">A</div>
+              <div class="item">B</div>
+              <div class="item baixo">C</div>
+            </div>
+          </div>
+        </div>
+      </div>
+
+      <p class="nota">
+        Se houver <em>quebra em várias linhas</em> (com <code>flex-wrap</code>), 
+        use <code>align-content</code> para alinhar as linhas como um bloco.
+      </p>
+    </section>
+
+    <section>
+      <h2>3) Controle por item: <code>flex</code>, <code>order</code>, <code>align-self</code></h2>
+      <p>
+        Cada item pode ter “regras próprias”.  
+        <code>flex</code> define como ele cresce/encolhe, <code>order</code> muda a ordem visual,
+        e <code>align-self</code> permite alinhar um item diferente dos demais.
+      </p>
+      <pre><code>.item { flex: 1 1 200px; }
+.item--fixo { flex: 0 0 160px; }
+.item--primeiro { order: -1; }
+.item--centralizado { align-self: center; }</code></pre>
+
+      <div class="demo-bloco">
+        <div class="demo-legenda">grow/shrink/basis • order • align-self</div>
+        <div class="linha exemplo-2">
+          <div class="item item--primeiro">order -1</div>
+          <div class="item">auto</div>
+          <div class="item item--fixo">fixo 160px</div>
+          <div class="item item--centralizado">self: center</div>
+        </div>
+      </div>
+    </section>
+
+    <section>
+      <h2>4) Padrões frequentes</h2>
+
+      <h3>Navbar com espaçamento automático</h3>
+      <p>
+        Um espaçador com <code>margin-left: auto</code> empurra os elementos seguintes para a direita — 
+        ótimo para separar links do botão de ação.
+      </p>
+      <pre><code>.navbar {
+  display: flex;
+  align-items: center;
+  gap: 10px;
+}
+.navbar .empurra { margin-left: auto; }</code></pre>
+      <div class="demo-bloco">
+        <div class="demo-legenda">margin-left: auto</div>
+        <div class="navbar">
+          <div class="item">Logo</div>
+          <a class="link">Docs</a>
+          <a class="link">Blog</a>
+          <span class="empurra"></span>
+          <button class="btn">Entrar</button>
+        </div>
+      </div>
+
+      <h3>Cards responsivos</h3>
+      <p>
+        Use <code>flex-wrap</code> para quebrar a linha e <code>flex: 1 1 260px</code> nos cards, 
+        assim eles fluem e ocupam o espaço disponível sem ficar espremidos.
+      </p>
+      <pre><code>.cards {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 12px;
+}
+.cards article { flex: 1 1 260px; }</code></pre>
+
+      <div class="cards">
+        <article class="card"><h4>Card 1</h4><p>Conteúdo.</p></article>
+        <article class="card"><h4>Card 2</h4><p>Conteúdo.</p></article>
+        <article class="card"><h4>Card 3</h4><p>Conteúdo.</p></article>
+        <article class="card"><h4>Card 4</h4><p>Conteúdo.</p></article>
+      </div>
+    </section>
+
+    <section class="teste-css">
+      <h2>🧩 Área de Testes</h2>
+      <p>
+        Brinque alterando as propriedades em <strong>flexbox.css</strong>.  
+        Sugestões: <code>flex-direction</code>, <code>wrap</code>, <code>gap</code>, 
+        <code>justify-content</code>, <code>align-items</code>.
+      </p>
+
+      <div class="teste-flex">
+        <div class="it">.it</div>
+        <div class="it">.it</div>
+        <div class="it">.it</div>
+        <div class="it">.it</div>
+      </div>
+    </section>
+
+  </main>
+
+  <footer>
+    <p>Desenvolvido por João Marcelo (O mais lindo e humilde) — © 2025</p>
+  </footer>
+
+</body>
+</html>

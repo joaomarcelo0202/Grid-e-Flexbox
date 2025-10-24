@@ -1,0 +1,107 @@
+pre code { font-family: ui-monospace, SFMono-Regular, Menlo, Consolas, monospace; }
+
+.demo-bloco {
+  background: rgba(255,255,255,0.05);
+  border: 1px solid rgba(255,255,255,0.12);
+  border-radius: 14px;
+  padding: 16px;
+  margin: 16px 0 24px;
+  box-shadow: 0 10px 30px rgba(0,0,0,0.25), inset 0 1px 0 rgba(255,255,255,0.04);
+}
+.demo-legenda {
+  font-size: .95rem;
+  color: #00d8ff;
+  margin-bottom: 10px;
+  letter-spacing: .2px;
+}
+
+.item, .it {
+  background: rgba(0, 216, 255, 0.12);
+  border: 2px dashed rgba(255,255,255,0.25);
+  color: #fff;
+  border-radius: 12px;
+  padding: 10px 14px;
+  min-width: 64px;
+  text-align: center;
+  font-weight: 600;
+  transition: transform .12s ease, box-shadow .15s ease;
+}
+.item:hover, .it:hover { transform: translateY(-2px); box-shadow: 0 6px 18px rgba(0,0,0,0.28); }
+
+.alto  { height: 80px; display: flex; align-items: center; justify-content: center; }
+.baixo { height: 30px; display: flex; align-items: center; justify-content: center; }
+
+.linha { display: flex; flex-wrap: wrap; gap: 12px; }
+.jus   { display: flex; gap: 12px; justify-content: space-between; }
+.align { display: flex; gap: 12px; align-items: center; height: 120px; }
+
+.exemplo-1 { background: rgba(255,255,255,0.04); padding: 12px; border-radius: 12px; }
+.exemplo-2 { background: rgba(0,216,255,0.08); padding: 12px; border-radius: 12px; }
+
+.item--fixo { flex: 0 0 160px; background: rgba(0,216,255,0.18); }
+.item--primeiro { order: -1; background: rgba(0,216,255,0.22); }
+.item--centralizado { align-self: center; }
+
+.exemplos-grid { display: grid; grid-template-columns: repeat(2, minmax(0, 1fr)); gap: 20px; }
+@media (max-width: 820px) { .exemplos-grid { grid-template-columns: 1fr; } }
+
+/* SEÇÃO 2: sem barras de rolagem, com quebra de linha apenas aqui */
+.sec-alinhamentos .exemplos-grid { align-items: start; }
+.sec-alinhamentos .exemplos-grid > div { min-width: 0; }
+.sec-alinhamentos pre.snippet { overflow: visible; max-width: 100%; }
+.sec-alinhamentos pre.snippet code { white-space: pre-wrap; word-break: break-word; tab-size: 2; }
+
+.navbar {
+  display: flex;
+  align-items: center;
+  gap: 10px;
+  padding: 12px;
+  background: linear-gradient(180deg, rgba(255,255,255,0.06), rgba(255,255,255,0.03));
+  border: 1px solid rgba(255,255,255,0.12);
+  border-radius: 12px;
+  backdrop-filter: blur(2px);
+}
+.navbar .link { text-decoration: none; color: #fff; opacity: .9; }
+.navbar .link:hover { text-decoration: underline; }
+.navbar .empurra { margin-left: auto; }
+.btn {
+  padding: 8px 12px;
+  border-radius: 10px;
+  border: 2px solid #fff;
+  background: #00d8ff;
+  color: #000;
+  font-weight: 700;
+  cursor: pointer;
+  transition: transform .12s ease, filter .15s ease;
+}
+.btn:hover { transform: translateY(-1px); filter: brightness(1.05); }
+
+.cards { display: flex; flex-wrap: wrap; gap: 12px; margin-top: 10px; }
+.card {
+  flex: 1 1 260px;
+  background: rgba(255,255,255,0.05);
+  border: 1px solid rgba(255,255,255,0.12);
+  border-radius: 12px;
+  padding: 14px;
+  transition: transform .12s ease, box-shadow .15s ease;
+}
+.card:hover { transform: translateY(-2px); box-shadow: 0 10px 26px rgba(0,0,0,0.25); }
+.card h4 { margin: 0 0 6px; }
+
+.teste-css { background: rgba(255,255,255,0.05); margin-top: 40px; padding: 25px; border-radius: 14px; }
+.teste-css h2 { color: #00d8ff; margin-bottom: 10px; }
+
+.teste-flex {
+  display: flex;
+  gap: 12px;
+  flex-wrap: wrap;
+  justify-content: center;
+  margin-top: 20px;
+  padding: 16px;
+  border: 2px dashed rgba(255,255,255,0.25);
+  border-radius: 12px;
+  background: rgba(255,255,255,0.03);
+}
+.teste-flex .it { min-width: 72px; }
+
+.nota { opacity: .9; }

@@ -1,0 +1,203 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Grid - Aula de CSS</title>
+  <link rel="stylesheet" href="style.css">
+  <link rel="stylesheet" href="grid.css">
+</head>
+<body>
+
+  <header>
+    <h1>Grid - Aula de CSS</h1>
+    <a href="index.html">⬅ Voltar ao Hub</a>
+  </header>
+
+  <main>
+    <section>
+      <h2>O que é CSS Grid?</h2>
+      <p>
+        <strong>CSS Grid</strong> é um sistema de layout <strong>bidirecional</strong>:
+        você cria uma grade com <strong>linhas e colunas</strong> e posiciona os itens dentro dela.
+        É ideal para páginas, dashboards, galerias e qualquer layout mais complexo.
+      </p>
+      <ul>
+        <li><code>display: grid;</code> — ativa a grade no contêiner;</li>
+        <li><code>grid-template-columns</code> / <code>grid-template-rows</code> — define colunas e linhas;</li>
+        <li><code>gap</code> — controla o espaçamento entre as células;</li>
+        <li><code>grid-column</code> / <code>grid-row</code> — posicionam itens por linhas;</li>
+        <li><code>grid-template-areas</code> — macro layout com áreas nomeadas.</li>
+      </ul>
+    </section>
+
+    <section>
+      <h2>1) Definindo colunas, linhas e espaçamento</h2>
+      <p>Uma grade básica com 3 colunas iguais e espaçamento:</p>
+
+      <pre><code>.grade {
+  display: grid;
+  grid-template-columns: repeat(3, 1fr);
+  grid-template-rows: auto;
+  gap: 12px;
+}</code></pre>
+
+      <div class="demo-bloco">
+        <div class="demo-legenda">repeat(3, 1fr) + gap</div>
+        <div class="grade exemplo-1">
+          <div class="cel">1</div>
+          <div class="cel">2</div>
+          <div class="cel">3</div>
+          <div class="cel">4</div>
+          <div class="cel">5</div>
+          <div class="cel">6</div>
+        </div>
+      </div>
+    </section>
+
+    <section>
+      <h2>2) Layout responsivo com <code>fr</code>, <code>minmax()</code> e <code>auto-fit</code></h2>
+      <p>
+        Use <code>auto-fit</code> e <code>minmax()</code> para que o número de colunas
+        se ajuste automaticamente ao espaço disponível:
+      </p>
+
+      <pre><code>.responsivo {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(220px, 1fr));
+  gap: 12px;
+}</code></pre>
+
+      <div class="responsivo">
+        <article class="card"><h4>Card 1</h4><p>Conteúdo.</p></article>
+        <article class="card"><h4>Card 2</h4><p>Conteúdo.</p></article>
+        <article class="card"><h4>Card 3</h4><p>Conteúdo.</p></article>
+        <article class="card"><h4>Card 4</h4><p>Conteúdo.</p></article>
+        <article class="card"><h4>Card 5</h4><p>Conteúdo.</p></article>
+      </div>
+
+      <p class="nota">
+        <strong>auto-fit</strong> “encaixa” o máximo de colunas possível respeitando o
+        <code>minmax()</code>. <strong>auto-fill</strong> reserva trilhas adicionais,
+        mesmo se não houver itens suficientes para preenchê-las.
+      </p>
+    </section>
+
+    <section>
+      <h2>3) Posicionando itens</h2>
+
+      <div class="exemplos-grid">
+        <div>
+          <h3>Por linhas/colunas</h3>
+          <pre><code>.pos {
+  display: grid;
+  grid-template-columns: 1fr 2fr 1fr;
+  gap: 10px;
+}
+.pos .destaque {
+  grid-column: 1 / 4;  /* ocupa 3 colunas */
+  grid-row: 1 / 2;
+}</code></pre>
+
+          <div class="demo-bloco">
+            <div class="demo-legenda">grid-column / grid-row</div>
+            <div class="pos">
+              <div class="cel destaque">Topo (1 / 4)</div>
+              <div class="cel">A</div>
+              <div class="cel">B</div>
+              <div class="cel">C</div>
+            </div>
+          </div>
+        </div>
+
+        <div>
+          <h3>Por áreas nomeadas</h3>
+          <pre><code>.layout {
+  display: grid;
+  grid-template-columns: 200px 1fr;
+  grid-template-rows: auto 1fr auto;
+  grid-template-areas:
+    "header header"
+    "sidebar main"
+    "footer footer";
+  gap: 10px;
+}
+.header { grid-area: header; }
+.sidebar { grid-area: sidebar; }
+.main   { grid-area: main; }
+.footer { grid-area: footer; }</code></pre>
+
+          <div class="demo-bloco">
+            <div class="demo-legenda">grid-template-areas</div>
+            <div class="layout">
+              <div class="cel header">Header</div>
+              <aside class="cel sidebar">Sidebar</aside>
+              <section class="cel main">Main</section>
+              <footer class="cel footer">Footer</footer>
+            </div>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <section>
+      <h2>4) Alinhamentos em Grid</h2>
+      <p>Você pode alinhar a grade inteira e também o conteúdo dentro de cada célula:</p>
+
+      <pre><code>.alinhar {
+  display: grid;
+  grid-template-columns: repeat(3, 120px);
+  grid-auto-rows: 80px;
+  justify-content: center; /* grade no eixo X */
+  align-content: center;   /* grade no eixo Y (multi-linhas) */
+  justify-items: center;   /* itens no eixo X */
+  align-items: center;     /* itens no eixo Y */
+  gap: 8px;
+  height: 260px;
+}</code></pre>
+
+      <div class="alinhar demo-bloco">
+        <div class="cel">1</div>
+        <div class="cel">2</div>
+        <div class="cel">3</div>
+        <div class="cel">4</div>
+        <div class="cel">5</div>
+        <div class="cel">6</div>
+      </div>
+    </section>
+
+    <section>
+      <h2>5) Truques úteis</h2>
+      <ul>
+        <li><code>grid-auto-flow: dense;</code> ajuda a “recompactar” buracos.</li>
+        <li>Use <code>minmax()</code> para evitar colunas estreitas demais.</li>
+        <li>Combine <strong>Grid</strong> para o macro layout e <strong>Flexbox</strong> para alinhar conteúdo dentro das células.</li>
+      </ul>
+    </section>
+
+    <section class="teste-css">
+      <h2>🧩 Área de Testes</h2>
+      <p>Edite as classes em <strong>grid.css</strong> (ou crie as suas) e veja os efeitos.</p>
+
+      <div class="teste-grid">
+        <div class="c">.c</div>
+        <div class="c">.c</div>
+        <div class="c">.c</div>
+        <div class="c">.c</div>
+        <div class="c">.c</div>
+        <div class="c">.c</div>
+      </div>
+
+      <p class="nota">
+        Dica: altere <code>grid-template-columns</code>, <code>gap</code>, <code>justify-items</code> e <code>align-items</code>.
+      </p>
+    </section>
+
+  </main>
+
+  <footer>
+    <p>Desenvolvido por João Marcelo (O mais lindo e humilde)— © 2025</p>
+  </footer>
+
+</body>
+</html>
